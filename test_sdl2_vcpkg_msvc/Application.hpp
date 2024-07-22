@@ -13,7 +13,10 @@ public:
 	void draw();
 
 private:
-	SDL_Window* m_window = nullptr;
+	Application(const Application&) = delete;
+	Application& operator=(const Application&) = delete;
+
+	SDL_Window *m_window = nullptr;
 	SDL_Surface* m_window_surface = nullptr;
 	SDL_Event m_window_event = {};
 

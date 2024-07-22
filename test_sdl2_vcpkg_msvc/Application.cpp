@@ -3,7 +3,6 @@
 Application::Application()
 {
     SDL_Init(SDL_INIT_VIDEO);
-
     m_window = SDL_CreateWindow("SDL2 Window",
         SDL_WINDOWPOS_CENTERED,
         SDL_WINDOWPOS_CENTERED,
