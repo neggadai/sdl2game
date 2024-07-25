@@ -1,2 +1,4 @@
-c:\profile\work\Unicum\sdl2game\x64\
-c:\profile\work\Unicum\sdl2game\test_sdl2_vcpkg_msvc\x64\
+/x64/*
+/test_sdl2_vcpkg_msvc/*
+/.vs/*
+*.user
