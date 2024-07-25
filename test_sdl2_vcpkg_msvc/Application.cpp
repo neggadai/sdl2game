@@ -6,7 +6,7 @@ Application::Application()
     m_window = SDL_CreateWindow("SDL2 Window",
         SDL_WINDOWPOS_CENTERED,
         SDL_WINDOWPOS_CENTERED,
-        680, 480,
+        1280, 720,
         0);
 
     if (m_window == nullptr)
@@ -25,7 +25,8 @@ Application::Application()
         return;
     }
 
-    m_image = SDL_LoadBMP("c:/profile/downloads/home.bmp");
+    m_image = SDL_LoadBMP("c:/profile/downloads/fa99e471c72044cfa48c11ecd9c731a1.bmp");
+
     if (m_image == nullptr)
     {
         std::cout << "Failed to load image\n";
@@ -45,6 +46,8 @@ void Application::update()
     bool keep_window_open = true;
     while (keep_window_open)
     {
+        m_image_position.x += 1;
+
         while (SDL_PollEvent(&m_window_event) > 0)
         {
             switch (m_window_event.type)
@@ -61,6 +64,6 @@ void Application::update()
 
 void Application::draw()
 {
-    SDL_BlitSurface(m_image, NULL, m_window_surface, NULL);
+    SDL_BlitSurface(m_image, NULL, m_window_surface, &m_image_position);
     SDL_UpdateWindowSurface(m_window);
 }
