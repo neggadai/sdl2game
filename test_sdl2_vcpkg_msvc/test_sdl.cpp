@@ -7,7 +7,7 @@
 int main(int argc, char* argv[])
 {
     Application app;
-    app.update();
+    app.loop(); 
 
 	return 0;
 }

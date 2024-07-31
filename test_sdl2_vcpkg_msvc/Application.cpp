@@ -24,15 +24,6 @@ Application::Application()
         std::cout << "SDL2 Error: " << SDL_GetError() << "\n";
         return;
     }
-
-    m_image = SDL_LoadBMP("c:/profile/downloads/fa99e471c72044cfa48c11ecd9c731a1.bmp");
-
-    if (m_image == nullptr)
-    {
-        std::cout << "Failed to load image\n";
-        std::cout << "SDL2 Error: " << SDL_GetError() << "\n";
-        throw 1;
-    }
 }
 
 Application::~Application()
@@ -41,15 +32,14 @@ Application::~Application()
     SDL_DestroyWindow(m_window);
 }
 
-void Application::update()
+void Application::loop()
 {
     bool keep_window_open = true;
     while (keep_window_open)
     {
-        m_image_position.x += 1;
-
         while (SDL_PollEvent(&m_window_event) > 0)
         {
+            m_stick_figure.handle_events(m_window_event);
             switch (m_window_event.type)
             {
             case SDL_QUIT:
@@ -58,12 +48,19 @@ void Application::update()
             }
         }
 
+        update(1.0 / 60.0);
         draw();
     }
 }
 
+void Application::update(double delta_time)
+{
+    m_stick_figure.update(delta_time);
+}
+
 void Application::draw()
 {
-    SDL_BlitSurface(m_image, NULL, m_window_surface, &m_image_position);
+    SDL_FillRect(m_window_surface, NULL, SDL_MapRGB(m_window_surface->format, 0, 0, 0));
+    m_stick_figure.draw(m_window_surface);
     SDL_UpdateWindowSurface(m_window);
 }
